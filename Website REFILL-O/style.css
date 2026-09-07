@@ -1,0 +1,665 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #cbdfe9;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.mobile-frame {
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #96c8e0 0%, #b8def0 26%, #dcedd6 58%, #85b86d 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.15);
+  overflow-x: hidden;
+}
+
+/* Ornamen Hiasan Latar Belakang */
+.nature-decorations {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.decor-bird {
+  position: absolute;
+  right: 14px;
+  top: 15px;
+}
+
+.decor-flowers {
+  position: absolute;
+  left: 10px;
+  top: 360px;
+  font-size: 1.4rem;
+}
+
+/* Navigasi Atas */
+.app-topbar {
+  background-color: #215e2e;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  z-index: 20;
+}
+
+.app-topbar h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.back-nav-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.brand-badge {
+  background: #ffffff;
+  padding: 4px 14px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brand-badge.small {
+  padding: 3px 10px;
+}
+
+.brand-badge.tiny {
+  padding: 2px 8px;
+  font-size: 0.75rem;
+}
+
+.brand-text {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-weight: 700;
+  color: #194d21;
+}
+
+/* Panel Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1.2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(27, 54, 25, 0.08);
+}
+
+/* Manajemen Tampilan SPA */
+.view {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.view.active {
+  display: flex;
+}
+
+.view-body {
+  padding: 16px 18px 90px;
+  flex: 1;
+}
+
+/* --- View 1: Autentikasi --- */
+#view-auth {
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.auth-card {
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.brand-tagline {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #235c2b;
+  letter-spacing: 1px;
+  margin: 10px 0 16px;
+}
+
+.auth-switch {
+  display: flex;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 16px;
+}
+
+.switch-btn {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  color: #3e5a42;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.switch-btn.active {
+  background: #ffffff;
+  color: #1b4922;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.google-auth-btn {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d4ded5;
+  padding: 12px;
+  border-radius: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  color: #4a684e;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(46, 107, 48, 0.2);
+}
+
+.auth-divider span {
+  padding: 0 8px;
+}
+
+.input-field {
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #17361b;
+  margin-bottom: 4px;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.input-field input:focus {
+  border-color: #2e7d32;
+}
+
+.action-btn-green {
+  width: 100%;
+  background: linear-gradient(180deg, #376f33 0%, #255021 100%);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 6px 16px rgba(25, 60, 22, 0.3);
+}
+
+/* --- View 2: Beranda --- */
+.user-meta {
+  margin-bottom: 12px;
+}
+
+.user-greeting {
+  font-size: 1.35rem;
+  color: #16361a;
+  font-weight: 800;
+}
+
+.user-tier {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #245d2c;
+}
+
+.point-banner {
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.card-caption {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #234827;
+}
+
+.large-number {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #17361a;
+  line-height: 1.1;
+}
+
+.sub-caption {
+  font-size: 0.8rem;
+  color: #3b5f3f;
+  font-weight: 600;
+}
+
+.medal-icon {
+  font-size: 2.6rem;
+}
+
+.metric-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.metric-card {
+  padding: 12px 14px;
+}
+
+.mid-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #17361a;
+  line-height: 1.1;
+  margin: 4px 0 2px;
+}
+
+.summary-card {
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.summary-header h4 {
+  color: #183e1c;
+  font-weight: 800;
+}
+
+.summary-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #2e7d32;
+}
+
+.summary-grid {
+  font-size: 0.85rem;
+  color: #28472b;
+}
+
+.grid-menus {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.menu-item-btn {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-item-btn strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #16361a;
+}
+
+.menu-item-btn p {
+  font-size: 0.72rem;
+  color: #385d3b;
+  font-weight: 600;
+}
+
+.menu-emoji {
+  font-size: 1.4rem;
+}
+
+/* --- View 3: Kuis & Learn --- */
+.flow-origin-indicator {
+  display: inline-block;
+  background: rgba(33, 94, 46, 0.15);
+  color: #1b4922;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.video-preview-box {
+  background: #2b2518;
+  color: #ffffff;
+  border-radius: 16px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.fact-box {
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.fact-box h4 {
+  color: #17381b;
+  margin-bottom: 4px;
+}
+
+.fact-box p {
+  font-size: 0.85rem;
+  color: #214425;
+  line-height: 1.4;
+}
+
+.quiz-box h3 {
+  font-size: 1.05rem;
+  color: #16361a;
+  margin-bottom: 10px;
+}
+
+.choice-option {
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  font-weight: 700;
+  color: #1a381d;
+  font-size: 0.92rem;
+}
+
+.choice-option.selected {
+  background: #ffffff;
+  border-color: #2e7d32;
+}
+
+/* --- View 4: Refill Now --- */
+.product-selection-list {
+  padding: 10px 14px;
+  margin: 10px 0 14px;
+}
+
+.prod-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 6px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+  color: #173b1b;
+}
+
+.prod-item-row:last-child {
+  border-bottom: none;
+}
+
+.prod-radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #a3bca5;
+  display: inline-block;
+}
+
+.prod-item-row.selected .prod-radio-circle {
+  border-color: #2e7d32;
+  background: #4caf50;
+  box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+.volume-selector-block {
+  margin-bottom: 12px;
+}
+
+.volume-selector-block label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #16361a;
+  margin-bottom: 4px;
+}
+
+.volume-selector-block select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: #ffffff;
+  font-weight: 700;
+  color: #17361a;
+  outline: none;
+}
+
+.price-indicator-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15rem;
+  color: #16361a;
+  margin-bottom: 12px;
+}
+
+.guide-steps-card {
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.guide-steps-card h4 {
+  color: #16361a;
+  margin-bottom: 6px;
+}
+
+.guide-steps-card ol {
+  padding-left: 18px;
+  font-size: 0.85rem;
+  color: #214425;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* --- View 5: Impact Dashboard --- */
+.impact-stat-item {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.impact-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.bg-light-green  { background: #d8edd6; }
+.bg-light-blue   { background: #d1e8f2; }
+.bg-light-yellow { background: #f7eed2; }
+
+.sdg-container {
+  padding: 16px;
+  margin-top: 6px;
+}
+
+.sdg-container h4 {
+  color: #17381b;
+  font-size: 0.95rem;
+}
+
+.sdg-subtext {
+  font-size: 0.8rem;
+  color: #2d5531;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.sdg-meter-bar {
+  height: 10px;
+  background: #c7decb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sdg-meter-fill {
+  height: 100%;
+  background: #2e7d32;
+}
+
+.sdg-status-text {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #1b4922;
+  margin-top: 6px;
+  text-align: right;
+}
+
+/* --- View 6: Reward --- */
+.reward-item-card {
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.claim-btn {
+  background: #2e7d32;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Navigasi Bawah (4 Tombol) */
+.app-bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  background-color: #215e2e;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 50;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.nav-btn.active {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.nav-ico {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.nav-btn-qr .qr-floating-circle {
+  background: #2e7d32;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -18px;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.hidden {
+  display: none !important;
+}

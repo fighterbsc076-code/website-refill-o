@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REFILL-O - Refill Today, Sustain Tomorrow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="mobile-frame">
+
+    <!-- Ornamen Latar Alam -->
+    <div class="nature-decorations">
+      <div class="decor-bird">
+        <svg viewBox="0 0 90 70" width="70">
+          <path d="M50 50 Q 30 55 10 40" stroke="#4a2e18" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <circle cx="55" cy="35" r="16" fill="#64B5F6"/>
+          <circle cx="63" cy="30" r="10" fill="#42A5F5"/>
+          <circle cx="66" cy="28" r="2" fill="#000"/>
+          <polygon points="72,30 80,32 72,35" fill="#FFA726"/>
+        </svg>
+      </div>
+      <div class="decor-flowers">🌼🌼</div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- 1. TAMPILAN LOGIN / DAFTAR                           -->
+    <!-- ==================================================== -->
+    <section id="view-auth" class="view active">
+      <div class="auth-card glass-panel">
+        <div class="brand-badge">
+          <span class="brand-text">REFILL-O</span>
+          <span class="brand-icon">🌿</span>
+        </div>
+        <p class="brand-tagline">REFILL TODAY, SUSTAIN TOMORROW.</p>
+
+        <!-- Toggle Masuk / Daftar -->
+        <div class="auth-switch">
+          <button class="switch-btn active" id="btn-tab-login" onclick="setAuthMode('login')">Masuk</button>
+          <button class="switch-btn" id="btn-tab-register" onclick="setAuthMode('register')">Daftar Akun</button>
+        </div>
+
+        <!-- Tombol Google -->
+        <button class="google-auth-btn" onclick="authGoogle()">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span id="google-label">Lanjutkan dengan Akun Google</span>
+        </button>
+
+        <div class="auth-divider"><span>atau dengan email</span></div>
+
+        <form id="auth-form" onsubmit="submitAuth(event)">
+          <div class="input-field hidden" id="field-name">
+            <label for="reg-name">Nama Lengkap</label>
+            <input type="text" id="reg-name" placeholder="Nama Anda">
+          </div>
+          <div class="input-field">
+            <label for="auth-email">Email</label>
+            <input type="email" id="auth-email" placeholder="Masukkan email" required>
+          </div>
+          <div class="input-field">
+            <label for="auth-pwd">Password</label>
+            <input type="password" id="auth-pwd" placeholder="Masukkan kata sandi" required>
+          </div>
+          <button type="submit" class="action-btn-green" id="btn-auth-submit">MASUK</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- 2. TAMPILAN BERANDA (DASHBOARD AWAL)                -->
+    <!-- ==================================================== -->
+    <section id="view-dashboard" class="view">
+      <header class="app-topbar">
+        <div class="brand-badge small">
+          <span class="brand-text">REFILL-O</span>
+          <span>🔄</span>
+        </div>
+        <span class="top-icon">🔔</span>
+      </header>
+
+      <div class="view-body">
+        <div class="user-meta">
+          <h2 class="user-greeting">Halo, <span id="display-username">Retta</span>! 👋</h2>
+          <span class="user-tier" id="display-tier">🌱 Green Advocate</span>
+        </div>
+
+        <!-- Green Point Hero Card (Dapat Ditukar ke Reward) -->
+        <div class="point-banner glass-panel" onclick="navigateTo('view-reward')">
+          <div>
+            <span class="card-caption">Green Point</span>
+            <div class="large-number" id="val-green-point">250</div>
+            <span class="sub-caption">Poin • Ketuk untuk Tukar Hadiah</span>
+          </div>
+          <div class="medal-icon">🏅</div>
+        </div>
+
+        <!-- Metrik Kupon: Total Refill & Plastik Dihindari -->
+        <div class="metric-dual">
+          <div class="metric-card glass-panel">
+            <span class="card-caption">Total Refill</span>
+            <div class="mid-number" id="val-total-refill">15</div>
+            <span class="sub-caption">Kali Pengisian</span>
+          </div>
+          <div class="metric-card glass-panel">
+            <span class="card-caption">Plastik Dihindari</span>
+            <div class="mid-number" id="val-plastic-avoided">30</div>
+            <span class="sub-caption" id="val-plastic-liters">Setara 15,0 Liter</span>
+          </div>
+        </div>
+
+        <!-- Ringkasan Singkat Dampak -->
+        <div class="summary-card glass-panel" onclick="navigateTo('view-impact')">
+          <div class="summary-header">
+            <h4>Dampakmu Hari Ini</h4>
+            <span class="summary-link">Rincian →</span>
+          </div>
+          <div class="summary-grid">
+            <div>Emisi Berkurang: <strong id="val-summary-co2">2,5 kg CO₂</strong></div>
+            <div>Penghematan: <strong id="val-summary-saving">Rp45.000</strong></div>
+          </div>
+        </div>
+
+        <!-- 4 Menu Utama -->
+        <div class="menu-block">
+          <h3>Menu Utama</h3>
+          <div class="grid-menus">
+            <button class="menu-item-btn glass-panel" onclick="startLearnFlow()">
+              <span class="menu-emoji">📚</span>
+              <div>
+                <strong>Learn</strong>
+                <p>Kuis & Edukasi</p>
+              </div>
+            </button>
+            <button class="menu-item-btn glass-panel" onclick="triggerScanFlow()">
+              <span class="menu-emoji">📷</span>
+              <div>
+                <strong>Refill Now</strong>
+                <p>Kamera Scan QR</p>
+              </div>
+            </button>
+            <button class="menu-item-btn glass-panel" onclick="navigateTo('view-reward')">
+              <span class="menu-emoji">🎁</span>
+              <div>
+                <strong>Reward</strong>
+                <p>Tukar Hadiah</p>
+              </div>
+            </button>
+            <button class="menu-item-btn glass-panel" onclick="navigateTo('view-impact')">
+              <span class="menu-emoji">📊</span>
+              <div>
+                <strong>Impact</strong>
+                <p>Dashboard Lengkap</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- 3. MATERI SINGKAT & KUIS                             -->
+    <!-- ==================================================== -->
+    <section id="view-quiz" class="view">
+      <header class="app-topbar">
+        <button class="back-nav-btn" onclick="abortQuizFlow()">❮</button>
+        <h2>Edukasi & Kuis</h2>
+        <div class="brand-badge tiny"><span>REFILL-O</span></div>
+      </header>
+
+      <div class="view-body">
+        <span class="flow-origin-indicator" id="quiz-flow-indicator">Sumber: Belajar Mandiri</span>
+        
+        <div class="video-preview-box" onclick="alert('▶ Memutar video edukasi: Bahaya Sampah Plastik Sekali Pakai (30s)')">
+          <span>▶ BAHAYA SINGLE-USE PLASTICS (00:30)</span>
+        </div>
+
+        <div class="fact-box glass-panel">
+          <h4>Tahukah kamu?</h4>
+          <p><strong>1 botol plastik</strong> membutuhkan waktu hingga 450 tahun untuk terurai di alam serta merusak ekosistem laut dan tanah.</p>
+        </div>
+
+        <div class="quiz-box">
+          <h3 id="quiz-question-text">Manakah perilaku yang mencerminkan konsumsi bijak?</h3>
+          <div class="quiz-choices" id="quiz-options-wrapper">
+            <!-- Pilihan dimuat dinamis dari script -->
+          </div>
+          <button class="action-btn-green" onclick="evaluateQuizAnswer()">Kirim Jawaban</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- 4. PENGISIAN (REFILL NOW)                            -->
+    <!-- ==================================================== -->
+    <section id="view-refill" class="view">
+      <header class="app-topbar">
+        <button class="back-nav-btn" onclick="navigateTo('view-dashboard')">❮</button>
+        <h2>Refill Now</h2>
+        <div class="brand-badge tiny"><span>REFILL-O</span></div>
+      </header>
+
+      <div class="view-body">
+        <h3>Pilih Produk</h3>
+        <div class="product-selection-list glass-panel" id="product-list-container">
+          <!-- Opsi produk dimuat dari JSON data -->
+        </div>
+
+        <div class="volume-selector-block">
+          <label for="refill-volume">Volume yang Diinginkan</label>
+          <select id="refill-volume" onchange="calculateRefillPrice()">
+            <option value="250">250 mL</option>
+            <option value="500" selected>500 mL</option>
+            <option value="1000">1.000 mL (1 Liter)</option>
+            <option value="1500">1.500 mL (1,5 Liter)</option>
+          </select>
+        </div>
+
+        <div class="price-indicator-row">
+          <span>Total Biaya:</span>
+          <strong id="refill-total-price">Rp0</strong>
+        </div>
+
+        <button class="action-btn-green" onclick="runDispenserRefill()">
+          REFILL NOW 💧
+        </button>
+
+        <div class="guide-steps-card glass-panel">
+          <h4>Cara Refill</h4>
+          <ol>
+            <li>Pilih produk & volume</li>
+            <li>Letakkan botol pada nozel dispenser</li>
+            <li>Tekan tombol REFILL NOW</li>
+            <li>Ambil produk dan selesai!</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- 5. IMPACT DASHBOARD                                  -->
+    <!-- ==================================================== -->
+    <section id="view-impact" class="view">
+      <header class="app-topbar">
+        <button class="back-nav-btn" onclick="navigateTo('view-dashboard')">❮</button>
+        <h2>Impact Dashboard</h2>
+        <div class="brand-badge tiny"><span>REFILL-O</span></div>
+      </header>
+
+      <div class="view-body">
+        <div class="impact-stat-item glass-panel">
+          <span class="impact-icon-circle bg-light-green">🧴</span>
+          <div>
+            <span class="card-caption">Plastik Dihindari</span>
+            <div class="mid-number"><span id="impact-plastic-count">30</span> <small>Kemasan</small></div>
+            <span class="sub-caption" id="impact-plastic-liters-desc">Volume: 15,0 Liter</span>
+          </div>
+        </div>
+
+        <div class="impact-stat-item glass-panel">
+          <span class="impact-icon-circle bg-light-blue">🌍</span>
+          <div>
+            <span class="card-caption">Emisi Berkurang</span>
+            <div class="mid-number"><span id="impact-co2-count">2,5</span> <small>kg CO₂</small></div>
+            <span class="sub-caption">Pencegahan polusi produksi baru</span>
+          </div>
+        </div>
+
+        <div class="impact-stat-item glass-panel">
+          <span class="impact-icon-circle bg-light-yellow">💰</span>
+          <div>
+            <span class="card-caption">Total Penghematan</span>
+            <div class="mid-number" id="impact-saving-val">Rp45.000</div>
+            <span class="sub-caption">Dibanding kemasan saset/botol ritel</span>
+          </div>
+        </div>
+
+        <div class="impact-stat-item glass-panel">
+          <span class="impact-icon-circle bg-light-green">🔄</span>
+          <div>
+            <span class="card-caption">Total Refill</span>
+            <div class="mid-number"><span id="impact-refill-count">15</span> <small>Kali</small></div>
+            <span class="sub-caption">Frekuensi aksi konsumsi bijak</span>
+          </div>
+        </div>
+
+        <!-- Kartu SDGs 12 -->
+        <div class="sdg-container glass-panel">
+          <h4>Kontribusimu untuk SDGs 12</h4>
+          <p class="sdg-subtext">Konsumsi dan Produksi yang Bertanggung Jawab</p>
+          <div class="sdg-meter-bar">
+            <div class="sdg-meter-fill" id="sdg-fill-bar" style="width: 90%;"></div>
+          </div>
+          <span class="sdg-status-text" id="sdg-percent-text">Pencapaian: 90% Target Mandiri</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- 6. PLACEHOLDER REWARD (PENUKARAN POIN)               -->
+    <!-- ==================================================== -->
+    <section id="view-reward" class="view">
+      <header class="app-topbar">
+        <button class="back-nav-btn" onclick="navigateTo('view-dashboard')">❮</button>
+        <h2>Penukaran Reward</h2>
+        <div class="brand-badge tiny"><span>REFILL-O</span></div>
+      </header>
+      <div class="view-body">
+        <div class="point-banner glass-panel">
+          <div>
+            <span class="card-caption">Saldo Green Point Anda</span>
+            <div class="large-number" id="reward-point-display">250</div>
+          </div>
+          <div class="medal-icon">🎁</div>
+        </div>
+        <h3>Katalog Voucher Ramah Lingkungan</h3>
+        <div class="reward-item-card glass-panel">
+          <div>
+            <strong>Diskon Refill 50%</strong>
+            <p>100 Green Point</p>
+          </div>
+          <button class="claim-btn" onclick="redeemPoints(100)">Tukar</button>
+        </div>
+        <div class="reward-item-card glass-panel">
+          <div>
+            <strong>Tumbler REFILL-O Eksklusif</strong>
+            <p>200 Green Point</p>
+          </div>
+          <button class="claim-btn" onclick="redeemPoints(200)">Tukar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- NAVIGASI BAWAH (4 Menu Utama, Pesan Dihapus)        -->
+    <!-- ==================================================== -->
+    <nav class="app-bottom-navbar hidden" id="global-bottom-nav">
+      <button class="nav-btn active" id="nav-btn-home" onclick="handleBottomNav('home')">
+        <span class="nav-ico">🏠</span>
+        <span>Beranda</span>
+      </button>
+
+      <button class="nav-btn" id="nav-btn-activity" onclick="handleBottomNav('activity')">
+        <span class="nav-ico">📋</span>
+        <span>Aktivitas</span>
+      </button>
+
+      <!-- Scan QR: Mengarah ke Materi/Kuis lalu Refill -->
+      <button class="nav-btn nav-btn-qr" onclick="triggerScanFlow()">
+        <div class="qr-floating-circle">📷</div>
+        <span>Scan QR</span>
+      </button>
+
+      <button class="nav-btn" id="nav-btn-account" onclick="handleBottomNav('account')">
+        <span class="nav-ico">👤</span>
+        <span>Akun</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

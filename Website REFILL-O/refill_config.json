@@ -1,0 +1,53 @@
+{
+  "application": {
+    "name": "REFILL-O",
+    "version": "2.0.0",
+    "theme": "Eco-friendly Circular Refill Solution"
+  },
+  "user_account": {
+    "username": "Retta",
+    "tier": "Green Advocate",
+    "green_points": 250,
+    "metrics": {
+      "total_refill_count": 15,
+      "plastic_avoided_bottles": 30,
+      "plastic_avoided_liters": 15.0,
+      "emissions_reduced_kg_co2": 2.5,
+      "financial_savings_idr": 45000,
+      "sdg_12_progress_percentage": 90
+    }
+  },
+  "dispenser_station": {
+    "station_id": "DISP-BOGOR-001",
+    "location": "Stasiun Refill Dramaga",
+    "hardware_state": "connected",
+    "products_catalog": [
+      { "id": "soap", "name": "Sabun Cair", "price_per_100ml": 1500, "active": true },
+      { "id": "detergent", "name": "Deterjen", "price_per_100ml": 1200, "active": true },
+      { "id": "softener", "name": "Softener", "price_per_100ml": 1400, "active": true },
+      { "id": "handsoap", "name": "Hand Soap", "price_per_100ml": 1600, "active": true }
+    ]
+  },
+  "learning_module": {
+    "material_title": "Bahaya Single-Use Plastics",
+    "duration": "00:30",
+    "points_reward": 10,
+    "quiz": {
+      "question": "Manakah perilaku yang mencerminkan konsumsi bijak?",
+      "options": [
+        { "id": 0, "text": "Membeli air kemasan setiap hari", "is_correct": false },
+        { "id": 1, "text": "Membawa botol / wadah sendiri", "is_correct": true },
+        { "id": 2, "text": "Menggunakan sedotan plastik sekali pakai", "is_correct": false }
+      ]
+    }
+  },
+  "navigation_bar": {
+    "removed": "pesan",
+    "menus": [
+      { "id": "home", "title": "Beranda", "icon": "home" },
+      { "id": "activity", "title": "Aktivitas", "icon": "history" },
+      { "id": "scan_qr", "title": "Scan QR", "icon": "camera_scanner", "target_flow": "quiz_then_refill" },
+      { "id": "account", "title": "Akun", "icon": "user_profile" }
+    ]
+  }
+}
