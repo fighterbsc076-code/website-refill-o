@@ -663,3 +663,62 @@ body {
 .hidden {
   display: none !important;
 }
+
+/* Overlay Kamera Scan QR */
+.qr-scanner-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  z-index: 100;
+  background: rgba(10, 20, 12, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.qr-scanner-modal {
+  width: 100%;
+  padding: 16px;
+}
+
+.qr-scanner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.qr-scanner-header h3 {
+  color: #16361a;
+  font-size: 1.05rem;
+}
+
+.qr-scanner-close-btn {
+  background: rgba(0, 0, 0, 0.08);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #16361a;
+}
+
+#qr-reader {
+  width: 100%;
+  min-height: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+
+.qr-scanner-status {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: #3b5f3f;
+  font-weight: 600;
+  text-align: center;
+}
