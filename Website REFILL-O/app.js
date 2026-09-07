@@ -109,10 +109,51 @@ function startLearnFlow() {
   navigateTo('view-quiz');
 }
 
+let html5QrCode = null;
+
 function triggerScanFlow() {
-  alert('📷 Membuka kamera: Memindai QR Code pada mesin stasiun dispenser REFILL-O...');
+  openQrScanner();
+}
+
+function openQrScanner() {
+  const overlay = document.getElementById('qr-scanner-overlay');
+  const statusEl = document.getElementById('qr-scanner-status');
+  overlay.classList.remove('hidden');
+  statusEl.textContent = 'Mengaktifkan kamera...';
+
+  if (typeof Html5Qrcode === 'undefined') {
+    statusEl.textContent = 'Modul kamera gagal dimuat. Periksa koneksi internet Anda.';
+    return;
+  }
+
+  html5QrCode = new Html5Qrcode('qr-reader');
+  html5QrCode.start(
+    { facingMode: 'environment' },
+    { fps: 10, qrbox: { width: 230, height: 230 } },
+    onQrScanSuccess,
+    () => {} // dipanggil setiap frame gagal terbaca QR, diabaikan
+  ).then(() => {
+    statusEl.textContent = 'Arahkan kamera ke QR Code pada mesin dispenser...';
+  }).catch((err) => {
+    console.error('Gagal memulai kamera:', err);
+    statusEl.textContent = 'Kamera tidak dapat diakses. Periksa izin kamera pada browser Anda.';
+  });
+}
+
+function closeQrScanner() {
+  document.getElementById('qr-scanner-overlay').classList.add('hidden');
+  if (html5QrCode) {
+    const instance = html5QrCode;
+    html5QrCode = null;
+    instance.stop().then(() => instance.clear()).catch(() => {});
+  }
+}
+
+function onQrScanSuccess(decodedText) {
+  closeQrScanner();
   AppState.quizSource = 'qr';
   document.getElementById('quiz-flow-indicator').textContent = 'Mode: Refill Dispenser (Lanjut ke Pengisian)';
+  alert(`✅ QR Code terdeteksi: ${decodedText}`);
   navigateTo('view-quiz');
 }
 

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 </head>
 <body>
   <div class="mobile-frame">
@@ -363,6 +364,20 @@
         <span>Akun</span>
       </button>
     </nav>
+
+    <!-- ==================================================== -->
+    <!-- OVERLAY: KAMERA SCAN QR CODE                         -->
+    <!-- ==================================================== -->
+    <div class="qr-scanner-overlay hidden" id="qr-scanner-overlay">
+      <div class="qr-scanner-modal glass-panel">
+        <div class="qr-scanner-header">
+          <h3>Scan QR Code</h3>
+          <button class="qr-scanner-close-btn" onclick="closeQrScanner()">✕</button>
+        </div>
+        <div id="qr-reader"></div>
+        <p class="qr-scanner-status" id="qr-scanner-status">Mengaktifkan kamera...</p>
+      </div>
+    </div>
 
   </div>
 
